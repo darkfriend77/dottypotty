@@ -6,40 +6,65 @@
     <title>Unity Web Player | Ajuna.DottyPotty</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+
+    <!-- Add the style here -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+
     <script async src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-      let tg = window.Telegram.WebApp;
-      tg.expand(); // Expands the Web App to full screen
+      document.addEventListener("DOMContentLoaded", function () {
+          let tg = window.Telegram.WebApp;
+          tg.expand(); // Expands the Web App to full screen
 
-      console.log("Telegram WebApp initialized:", tg);
-      console.log("Init Data:", tg.initDataUnsafe);
+          console.log("Telegram WebApp initialized:", tg);
+          console.log("Init Data:", tg.initDataUnsafe);
 
-      function sendMessageToBot() {
-          if (!tg.initDataUnsafe.user) {
-              console.error("Telegram user data not available.");
-              return;
+          function resizeCanvas() {
+              let canvas = document.getElementById("unity-canvas");
+              canvas.style.width = window.innerWidth + "px";
+              canvas.style.height = window.innerHeight + "px";
           }
 
-          fetch(`https://api.telegram.org/bot7556552128:AAH-DNgYQEGDWt_yHW-vc13rlQEIwqYbtEI/sendMessage`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                  chat_id: tg.initDataUnsafe.user.id,
-                  text: "The game has started!"
-              }),
-          }).then(response => response.json())
-            .then(data => console.log("Message sent:", data))
-            .catch(error => console.error("Error sending message:", error));
-      }
+          window.addEventListener("resize", resizeCanvas);
+          window.onload = resizeCanvas;
 
-      window.onload = () => {
-          console.log("Window loaded");
+          function sendMessageToBot() {
+              if (!tg.initDataUnsafe.user) {
+                  console.error("Telegram user data not available.");
+                  return;
+              }
+
+              fetch(`https://api.telegram.org/bot7556552128:AAH-DNgYQEGDWt_yHW-vc13rlQEIwqYbtEI/sendMessage`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                      chat_id: tg.initDataUnsafe.user.id,
+                      text: "The game has started!"
+                  }),
+              }).then(response => response.json())
+                .then(data => console.log("Message sent:", data))
+                .catch(error => console.error("Error sending message:", error));
+          }
+
           sendMessageToBot();
-      };
-  </script>
-</head>
+      });
+    </script>
+  </head>
   <body>
-
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width="600" height="800" tabindex="-1"></canvas>
       <div id="unity-loading-bar">
@@ -54,7 +79,6 @@
     </div>
 
     <script>
-
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/Build.loader.js";
       var config = {
@@ -82,6 +106,5 @@
       };
       document.body.appendChild(script);
     </script>
-
   </body>
 </html>
