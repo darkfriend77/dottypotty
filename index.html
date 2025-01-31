@@ -22,11 +22,24 @@
 
     <script>
 
+      let tg = window.Telegram.WebApp;
+      tg.expand(); // Expand the Web App to full screen
 
-      if (window.Telegram && window.Telegram.WebApp) {
-          var tg = window.Telegram.WebApp;
-          tg.expand(); // Only applies in Telegram
+      // Send a message to the bot when the game starts
+      function sendMessageToBot() {
+          fetch(`https://api.telegram.org/bot7556552128:AAH-DNgYQEGDWt_yHW-vc13rlQEIwqYbtEI/sendMessage`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                  chat_id: tg.initDataUnsafe.user.id,
+                  text: "The game has started!"
+              }),
+          });
       }
+
+      window.onload = () => {
+        sendMessageToBot();
+      };
 
       var canvas = document.querySelector("#unity-canvas");
 
