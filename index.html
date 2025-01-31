@@ -42,14 +42,15 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/Build.loader.js";
       var config = {
-        arguments: [],
-        dataUrl: buildUrl + "/Build.data.gz",
-        frameworkUrl: buildUrl + "/Build.framework.js.gz",
-        codeUrl: buildUrl + "/Build.wasm.gz",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "Ajuna.DottyPotty",
-        productVersion: "1.0",
+          arguments: [],
+          dataUrl: buildUrl + "/Build.data",
+          frameworkUrl: buildUrl + "/Build.framework.js",
+          codeUrl: buildUrl + "/Build.wasm",
+          streamingAssetsUrl: "StreamingAssets",
+          companyName: "DefaultCompany",
+          productName: "Ajuna.DottyPotty",
+          productVersion: "1.0",
+          showBanner: unityShowBanner,
       };
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {

@@ -1,0 +1,35 @@
+# Ignore Unity-generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uilds/
+[Bb]uild/
+
+# Except WebGL build folder (GitHub Pages requires "Build" folder)
+!Build/
+
+# Ignore Logs, Cache, and Unity Settings
+Logs/
+UserSettings/
+MemoryCaptures/
+
+# Ignore Unity Lock files
+*.pidb
+*.suo
+*.sln*
+*.userprefs
+*.csproj
+*.unityproj
+*.asset
+*.tga
+*.cubemap
+*.dds
+*.sbsar
+
+# Ignore Compression Artifacts
+*.gz
+*.br
+
+# Ignore system files
+.DS_Store
+Thumbs.db
