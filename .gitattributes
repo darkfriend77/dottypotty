@@ -1,5 +1,6 @@
-*.gz binary
-*.br binary
-*.wasm application/wasm
-*.data application/octet-stream
-*.js text/javascript
+# Force GitHub Pages to serve Unity WebGL files correctly
+*.data    binary
+*.wasm    binary
+*.mem     binary
+*.symbols binary
+*.js      text eol=lf
