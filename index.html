@@ -7,7 +7,9 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
 
-    <!-- Add the style here -->
+    <!-- ✅ Viewport meta for proper scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+
     <style>
         html, body {
             margin: 0;
@@ -15,12 +17,25 @@
             overflow: hidden;
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+
+        #unity-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         canvas {
-            display: block;
             width: 100% !important;
             height: 100% !important;
+            display: block;
         }
     </style>
 
@@ -40,6 +55,7 @@
           }
 
           window.addEventListener("resize", resizeCanvas);
+          tg.onEvent("viewportChanged", resizeCanvas); // 🔥 Fix for Telegram Mini Apps resizing
           window.onload = resizeCanvas;
 
           function sendMessageToBot() {
@@ -66,7 +82,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width="600" height="800" tabindex="-1"></canvas>
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
